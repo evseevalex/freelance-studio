@@ -9,8 +9,8 @@ export class Router {
 		this.routes = [
 			{
 				route: '/',
-				title: 'Личный кабинет',
-				filePathTemplate: './template/dashboard.html',
+				title: 'Дашбоард',
+				filePathTemplate: '/templates/dashboard.html',
 				load: () => {
 					new Dashboard()
 				},
@@ -18,7 +18,7 @@ export class Router {
 			{
 				route: '/login',
 				title: 'Авторизация',
-				filePathTemplate: './template/login.html',
+				filePathTemplate: '/templates/login.html',
 				load: () => {},
 			},
 			{
@@ -26,9 +26,9 @@ export class Router {
 				load: () => {},
 			},
 			{
-				route: '/sign-up',
+				route: '/signup',
 				title: 'Регистрация',
-				filePathTemplate: './template/sign-up.html',
+				filePathTemplate: '/templates/sign-up.html',
 				load: () => {},
 			},
 			{
@@ -38,21 +38,21 @@ export class Router {
 			{
 				route: '/404',
 				title: 'Страница не найдена',
-				filePathTemplate: './template/404.html',
+				filePathTemplate: '/templates/404.html',
 				load: () => {},
 			},
 		]
 	}
 
 	initEvents() {
-		document.addEventListener(
+		window.addEventListener(
 			'DOMContentLoaded',
-			this.activateRouter.bind(this)
+			this.activateRoute.bind(this)
 		)
-		document.addEventListener('popstate', this.activateRouter.bind(this))
+		window.addEventListener('popstate', this.activateRoute.bind(this))
 	}
 
-	async activateRouter() {
+	async activateRoute() {
 		const urlRoute = window.location.pathname
 		const newRoute = this.routes.find(item => item.route === urlRoute)
 
@@ -71,11 +71,11 @@ export class Router {
 				newRoute.load()
 			}
 		} else {
-			redirect('/404')
+			this.redirect('/404')
 		}
 	}
 
 	redirect(route) {
-		window.location.href = route
+		window.location = route
 	}
 }
