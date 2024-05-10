@@ -1,4 +1,5 @@
 import { Dashboard } from './components/dashboard'
+import { Login } from './components/login'
 
 export class Router {
 	constructor() {
@@ -25,6 +26,7 @@ export class Router {
 				useLayout: false,
 				load: () => {
 					document.body.classList.add('login-page')
+					new Login()
 				},
 				unload: () => {
 					document.body.classList.remove('login-page')
